@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <script src="https://npmcdn.com/ipfs-api/dist/index.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/markdown.js"></script>
+    <link rel='stylesheet' href='style.css' type='text/css'>
+  </head>
+
+  <div class="navbar">
+    <a href= "index.html" class="nav">Home</a> <a id="home-user" class = "nav">My Posts</a>
+  </div>
+
+  <body>
+    <div class="content" style="padding-top=0px;">
+      <h1 class= "header" id="replyto"> Publish a document</h1>
+      <br>
+      <div id="noWeb3" class="warning" style = "display: none;">
+        This Browser does not support Ethereum apps. <br> <a href="http://ethereum.org">Download Mist</a>
+      </div>
+        <input id="new-document-title" type="text"  style="width: 100%; height: 2em;" placeholder="Document Title" >
+        <br>
+        <input id="new-document-content" type="text"  style="width: 100%; height: 4em;" placeholder="Document Content" >
+        <br>
+        <input id="new-document-tags" type="text"  style="width: 100%; height: 4em;" placeholder="Tags" >
+        <button id="reply">Reply</button>
+    </div>
+  </body>
+
+  <script>
+  function init() {
+    query = decodeURI(getParameterByName('query'));
+    document.getElementById("replyto").innerHTML = "Reply to: " + getTitle(query);
+    var noWeb3 = document.getElementById('noWeb3')
+    // IPFS Initialization
+    ipfs = window.IpfsApi('localhost', '5001');
+
+    // Web3 Initialization
+    if(typeof web3 !== 'undefined' && typeof Web3 !== 'undefined') {
+        // If there's a web3 library loaded, then make your own web3
+        web3 = new Web3(web3.currentProvider);
+    } else if (typeof Web3 !== 'undefined') {
+        // If there isn't then set a provider
+        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+    } else if(typeof web3 == 'undefined') {
+      // Alert the user he is not in a web3 compatible browser
+      console.log("not web3 compatible");
+      document.getElementById("noWeb3").style.display = "block";
+
+      return;
+    }
+
+    document.getElementById('home-user').href = "user.html?query=" + web3.eth.accounts[0];
+
+    document.getElementById('reply').onclick = function() {
+      title = document.getElementById('new-document-title').value;
+      content = document.getElementById('new-document-content').value;
+      tags = document.getElementById('new-document-tags').value;
+      console.log(title, content, tags);
+      reply(title, content, query);
+    }
+  }
+    if (document.addEventListener) document.addEventListener("DOMContentLoaded", init, false);
+    else if (document.attachEvent) document.attachEvent("onreadystatechange", init);
+    else window.onload = init;
+  </script>
+</html>

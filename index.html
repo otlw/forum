@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <script src="https://npmcdn.com/ipfs-api/dist/index.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/markdown.js"></script>
+    <link rel='stylesheet' href='style.css' type='text/css'>
+  </head>
+
+  <div class="navbar">
+    <a href= "index.html" class="nav">Home</a> <a id="home-user" class = "nav">My Posts</a>
+  </div>
+
+  <body>
+    <div class="content" style="padding-top=0px;">
+      <h1 style="text-align: center;">Publish a document</h1>
+
+      <div id="noWeb3" class="warning" style = "display: none;">
+        This Browser does not support Ethereum apps. <br> <a href="http://ethereum.org">Download Mist</a>
+      </div>
+        <input id="new-document-title" type="text"  style="width: 100%; height: 2em;" placeholder="Document Title" >
+        <br>
+        <input id="new-document-content" type="text"  style="width: 100%; height: 4em;" placeholder="Document Content" >
+        <br>
+        <input id="new-document-tags" type="text"  style="width: 100%; height: 4em;" placeholder="Tags" >
+        <button id="publish">Publish</button>
+    </div>
+    <div class="content">
+      <h1 style="text-align: center;">Search a tag</h1>
+      <input id="search-tag" type="text"  style="width: 100%; height: 4em;" placeholder="Search a tag for posts">
+    </div>
+
+    <div class="content">
+      <h1 style="text-align: center;">Find Post</h1>
+      <input id="search-post" type="text"  style="width: 100%; height: 4em;" placeholder="Enter a post address">
+    </div>
+
+    <script type="text/javascript">
+      function autorun(){
+         init();
+      }
+      if (document.addEventListener) document.addEventListener("DOMContentLoaded", autorun, false);
+      else if (document.attachEvent) document.attachEvent("onreadystatechange", autorun);
+      else window.onload = autorun;
+    </script>
+  </body>
+</html>

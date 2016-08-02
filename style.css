@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:500|Roboto');
+
+body {
+    background: #dedfde;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25em;
+    background-size: 100%;
+}
+
+.content {
+    background: #fefefe;
+    max-width: 80%;
+    margin-top: 0px;
+    margin: 2em auto;
+    margin-bottom: 10px;
+    padding: 32px;
+    padding-bottom: 10px;
+    border-radius: 1px;
+    box-shadow: rgba(25,210,213,0.2) 0 2px 8px;
+}
+.navbar {
+    background: #fefefe;
+    max-width: full;
+    padding: 16px;
+    box-shadow: rgba(0,0,0,0.2) 0 2px 8px;
+}
+.nav {
+  background-color: #19D2D5;
+  padding: 0.5em;
+  border-radius: 1px;
+  border-style: solid;
+  border-width: thin;
+  border-color: #6a0e0c;
+  text-decoration: none;
+
+}
+input {
+  display: inherit;
+}
+.warning {
+    text-align: center;
+    background: #cc0000;
+    max-width: 50%;
+    margin: 30px auto;
+    padding: 32px;
+    border-radius: 1px;
+    box-shadow: rgba(0,0,0,0.2) 0 2px 8px;
+}
+h1 {
+  font-family = "Roboto", sans;
+}
+.header {
+    margin-top: 5px;
+  	margin-bottom: 0px;
+    font-family: 'Roboto', sans-serif;
+  	font-size: 2em;
+  	line-height: 0.8em;
+  	letter-spacing: -2px;
+  	font-weight: bold;
+}
+.replybox {
+    background: #fefefe;
+    max-width: 80%;
+    margin: 90px auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 32px;
+    padding-top: 5px;
+    border-radius: 1px;
+    box-shadow: rgba(0,0,0,0.2) 0 2px 8px;
+}
+.comments {
+    background: #e5e5e5;
+    max-width: 95%;
+    margin: 10px auto;
+    padding: 32px;
+    border-color: #19D2D5;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1px;
+    box-shadow: rgba(25,210,213,0.2) 0 2px 8px;
+}
+.subtitle {
+    padding-top: 3px;
+    font-style: italic;
+    font-size: 0.8em;
+}
+.tags {
+  text-align: right;
+  font-size: 10px;
+  font-style: italic;
+}
+button {
+    font-size: 150%;
+    font-family: 'Source Serif Pro', serif;
+    border: none;
+    background-color: #19D2D5;
+    color: #FFF;
+    padding: 2px 20px;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    border-bottom: solid #555 3px;
+    box-shadow: #ddd 0 2px 2px;
+    outline: none;
+}
+
+
+button:active,
+button.pressed {
+    border-bottom: none;
+    box-shadow: inset rgba(0,0,0,0.5) 0 2px 2px;
+    position: relative;
+    top: 3px;
+}
+
+#results #support ,
+button#vote-support {
+    background: green;
+    border-bottom-color: darkgreen;
+}
+
+
+button.pressed {
+
+}
+
+h2 {
+    opacity: 0.5;
+}
+
+.write {
+    position: relative;
+    background: #eee;
+    padding: 20px 10px;
+    border-radius: 2px;
+    margin: 0 -32px -32px;
+    border-top-style: solid;
+    border-top-width: thin;
+    border-top-color: #625D5D;
+}
+
+#new-proposal {
+    font-family: 'Source Serif Pro', serif;
+    font-size: 150%;
+    width: 600px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: solid 2px #ddd;
+}
+
+#new-proposal-link {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: #333;
+    color: #FFF;
+    padding: 8px 15px;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 2px;
+    display: none;
+}
+
+#status {
+    position: fixed;
+    bottom: 32px;
+    left: 0;
+    right: 0;
+    font-size: 150%;
+    opacity: 0.5;
+    text-align: center;
+}
+
+#results {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+#results h3 {
+    display: inline-block;
+    width: 50%;
+    padding: 20px 0;
+    color: #FFF;
+    width: 1%;
+    max-width: 99.5% !important;
+    min-width: 0.5% !important;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+    transition: width 1s ease-in-out, min-width 1s ease-in-out, max-width 1s ease-in-out;
+    text-indent: 8px;
+}
+
+#results:hover h3 {
+    max-width: 80% !important;
+}
+
+#results:hover h3:hover {
+    min-width: 20% !important;
+    max-width: 99.5% !important;
+}
+
+#message {
+    display: none;
+    padding: 30px;
+    font-size: 150%;
+    font-style: italic;
+}
+
+#add-account {
+    display: none;
+    background: #333;
+    color: #FFF;
+    position: fixed;
+    top: 90px;
+    right: 32px;
+    padding: 20px 30px;
+    box-shadow: rgba(0,0,0,0.2) 0 2px 8px;
+}
+
+#add-account:before {
+    display: block;
+    background: #333;
+    transform: rotate(45deg);
+    top: -9px;
+    width: 20px;
+    height: 20px;
+    content: " ";
+    position: absolute;
+    left: 250px;
+}

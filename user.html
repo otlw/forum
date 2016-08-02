@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <script src="https://npmcdn.com/ipfs-api/dist/index.js"></script>
+    <script src="js/scripts.js"></script>
+    <link rel='stylesheet' href='style.css' type='text/css'>
+  </head>
+
+  <div class="navbar">
+    <a href= "index.html" class="nav">Home</a> <a id="home-user" class = "nav">My Posts</a>
+  </div>
+  <br>
+  <div class='content'>
+    <h2 id = "user"></h2>
+  </div>
+
+  <div id="posts" class = 'replybox'>
+  </div>
+
+
+<script type="text/javascript">
+  function init() {
+    query = decodeURI(getParameterByName('query'));
+    document.getElementById("user").innerHTML = "Posts by: <br>" + query;
+    var noWeb3 = document.getElementById('noWeb3')
+    // IPFS Initialization
+    ipfs = window.IpfsApi('localhost', '5001');
+
+    // Web3 Initialization
+    if(typeof web3 !== 'undefined' && typeof Web3 !== 'undefined') {
+        // If there's a web3 library loaded, then make your own web3
+        web3 = new Web3(web3.currentProvider);
+    } else if (typeof Web3 !== 'undefined') {
+        // If there isn't then set a provider
+        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+    } else if(typeof web3 == 'undefined') {
+      // Alert the user he is not in a web3 compatible browser
+      console.log("not web3 compatible");
+      document.getElementById("noWeb3").style.display = "block";
+
+      return;
+    }
+
+    document.getElementById('home-user').href = "user.html?query=" + web3.eth.accounts[0];
+
+    posts = getPostsFromAuthor(query);
+
+    for(i = 0; i<posts.length; i++) {
+      var postLink = document.createElement('a');
+      postLink.href = "page.html?query="+posts[i];
+      postLink.id = "post" + i.toString();
+      postLink.style = "text-decoration: none;";
+      var post = document.createElement("div");
+      post.className= 'comments';
+      post.id = "post" + i.toString();
+      postContent = document.createElement("a");
+      postContent.href = "page.html?query="+posts[i]
+      postContent.textContent = getTitle(posts[i]);
+      document.getElementById("posts").appendChild(post)
+      post.appendChild(postContent);
+
+    }
+  }
+
+  if (document.addEventListener) document.addEventListener("DOMContentLoaded", init, false);
+  else if (document.attachEvent) document.attachEvent("onreadystatechange", init);
+  else window.onload = init;
+</script>
+</html>

@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <script src="https://npmcdn.com/ipfs-api/dist/index.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/page.js"></script>
+    <script src="js/markdown.js"></script>
+    <link rel='stylesheet' href='style.css' type='text/css'>
+  </head>
+
+  <div class="navbar">
+    <a href= "index.html">Home</a> <a id="home-user" class = >My Posts</a>
+  </div>
+  <body>
+    <div class="content">
+      <div id="noWeb3" class="warning" style = "display: none;">
+        This Browser does not support Ethereum apps. <br> <a href="http://ethereum.org">Download Mist</a>
+      </div>
+
+      <h1 id="title" class="header"></h1>
+      <div id = "author" class = "subtitle"></div>
+      <div id="bodyContent"> </div>
+      <div id ='tags' class="tags"> </div>
+
+      <button id="new-reply">Reply</button>
+    </div>
+
+    <div id="replies" class="content">
+    </div>
+
+    <script type="text/javascript">
+      function autorun(){
+         init();
+      }
+      if (document.addEventListener) document.addEventListener("DOMContentLoaded", autorun, false);
+      else if (document.attachEvent) document.attachEvent("onreadystatechange", autorun);
+      else window.onload = autorun;
+    </script>
+  </body>
+</html>
