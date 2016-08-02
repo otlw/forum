@@ -96,12 +96,29 @@ function reply(title, data, replyTo) {
           console.log('return account', e, account);
           if(!e) {
               // Create a dialog requesting the transaction
-              replyAddress = forum.makeReply(title, data, [web3.eth.accounts[0]], {from: web3.eth.accounts[0], value: web3.toWei(replyCost, 'wei')});
-              document.getElementById('status').textContent = 'Waiting for new block...';
+              replyAddress = forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: replyCost});
           }
       });
       console.log('callbacks', mist.callbacks);
 
+    }
+}
+
+function tagPost(address, tag){
+  if (web3.eth.accounts && web3.eth.accounts.length > 0) {
+      // Create a dialog requesting the transaction
+      forum.addTag(address, tag, {from: web3.eth.accounts[0]});
+
+    } else {
+      console.log('callbacks', mist.callbacks);
+      mist.requestAccount(function(e, account) {
+          console.log('return account', e, account);
+          if(!e) {
+              // Create a dialog requesting the transaction
+              forum.addTag(address, tag, {from: web3.eth.accounts[0]});
+          }
+      });
+      console.log('callbacks', mist.callbacks);
     }
 }
 

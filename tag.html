@@ -20,7 +20,7 @@
 <script type="text/javascript">
   function init() {
     query = decodeURI(getParameterByName('query'));
-    document.getElementById("user").innerHTML = "Posts tagged: <br>" + query;
+    document.getElementById("user").innerHTML = "Posts tagged: " + query;
     var noWeb3 = document.getElementById('noWeb3')
     // IPFS Initialization
     ipfs = window.IpfsApi('localhost', '5001');
