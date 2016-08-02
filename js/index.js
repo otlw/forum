@@ -23,7 +23,6 @@ function init() {
   document.getElementById('publish').onclick = function() {
     title = document.getElementById('new-document-title').value;
     content = document.getElementById('new-document-content').value;
-    tags = document.getElementById('new-document-tags').value;
     publish(title, content);
   }
   document.getElementById('search-tag').onkeyup= function (e) {
