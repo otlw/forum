@@ -26,3 +26,8 @@ Through the app you can publish documents, reply to them, and browse tags and us
 Currently some functionality is not fully built into the application, such as setting sources for a document. If you would like to do this you can explore [these contracts](https://github.com/otlw/otlw-publish), and add the relevant ones to your Ethereum Wallet to use them.
 
 Try navigating to this post: `0x7af8f4e400fcc03bf9485d8f65fa4bce4ce16436`
+
+##Support
+We're a small development team, and we're entirely self-funded. Which means we literally used our only ether to deploy this contract. So any help, whether in the form of donations or pull requests, is much appreciated. 
+
+For the former, our eth address is: `0x60c4dC9a557f7FF2E89ad791bAc53D42b51EeE03` and our btc address is `1CV8AKrgNgMZXw26saLtdj7r6p51XeCrfj`
