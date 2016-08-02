@@ -28,7 +28,12 @@ Currently some functionality is not fully built into the application, such as se
 Try navigating to this post: `0x7af8f4e400fcc03bf9485d8f65fa4bce4ce16436`
 
 ##Creating a Post and Replying
-We use IPFS for content distribution so if you want to post or reply with any content exceeding a 100 words, you need to create a file and use `ipfs add` to store it locally and generate its hash. Then submit this hash as the content of your post of reply. You need to also be running `ipfs daemon` so that others can access this file. 
+We use IPFS for content distribution so if you want to post or reply with any content exceeding a 100 words, you need to create a file and use `ipfs add` to store it locally and generate its hash which will look like this.
+
+```
+QmbRk7CRhF9Ag2PBrZmTvaP99XsPbE3kkSVTxL4oDgkosu
+```
+Then submit this hash as the content of your post of reply. You need to also be running `ipfs daemon` so that others can access this file.
 
 ##Support
 We're a small development team, and we're entirely self-funded. Which means we literally used our only ether to deploy this contract. So any help, whether in the form of donations or pull requests, is much appreciated.
