@@ -42,33 +42,35 @@
 
     document.getElementById('home-user').href = "user.html?query=" + web3.eth.accounts[0];
 
-    posts = getPostsFromAuthor(query);
+    forum.getPostsFromAuthor(query, function(error, result) {
+      for(i = 0; i < result.length; i++) {
+        var post = document.createElement("div");
+        post.className= 'comments';
+        post.id = "post" + i.toString();
+        postContent = document.createElement("a");
+        postContent.href = "page.html?query="+result[i]
+        postContent.textContent = getTitle(result[i]);
+        document.getElementById("posts").appendChild(post)
+        post.appendChild(postContent);
 
-    for(i = 0; i < posts.length; i++) {
-      var post = document.createElement("div");
-      post.className= 'comments';
-      post.id = "post" + i.toString();
-      postContent = document.createElement("a");
-      postContent.href = "page.html?query="+posts[i]
-      postContent.textContent = getTitle(posts[i]);
-      document.getElementById("posts").appendChild(post)
-      post.appendChild(postContent);
-
-      if (web3.eth.accounts[0] === query) {
-        tagForm = document.createElement('input');
-        tagForm.id = i;
-        tagForm.style = "display:inline; float: right;"
-        tagForm.type = "text";
-        tagForm.placeholder = "Enter Tag"
-        post.appendChild(tagForm)
-        document.getElementById(tagForm.id).onkeyup = function (e) {
-          if (e.keyCode == 13 ){
-            console.log(posts[tagForm.id]);
-            tagPost(posts[tagForm.id], document.getElementById(tagForm.id).value);
+        if (web3.eth.accounts[0] === query) {
+          tagForm = document.createElement('input');
+          tagForm.id = i;
+          tagForm.style = "display:inline; float: right;"
+          tagForm.type = "text";
+          tagForm.placeholder = "Enter Tag"
+          post.appendChild(tagForm)
+          document.getElementById(tagForm.id).onkeyup = function (e) {
+            if (e.keyCode == 13 ){
+              console.log(result[tagForm.id]);
+              tagPost(result[tagForm.id], document.getElementById(tagForm.id).value);
+            }
           }
         }
       }
-    }
+
+    });
+
   }
 
   if (document.addEventListener) document.addEventListener("DOMContentLoaded", init, false);

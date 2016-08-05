@@ -4,13 +4,16 @@ var documentABI =  [{"constant":false,"inputs":[],"name":"getTotalWeight","outpu
 var textContent;
 var forum = web3.eth.contract(forumABI).at(forumAddress);
 
-function getTags(address) {
+function getTags(address, divID) {
   var tags = []
-  for( k = 0; k < forum.getNumberOfTags(address); k++) {
-    tag = forum.getTagFromPosts(address, k)
-    tags.push('<a href = tag.html?query='+tag+">"+tag+"</a>");
-  }
-  return tags;
+  forum.getNumberOfTags(address, function(error, result) {
+    for( k = 0; k < result; k++) {
+      forum.getTagFromPosts(address, k, function(error, result) {
+        tags.push('<a href = tag.html?query='+result+">"+result+"</a>");
+        document.getElementById(divID).innerHTML = "Tagged with: " + tags;
+      })
+    }
+  })
 }
 
 function getReplies(address){
@@ -21,26 +24,29 @@ function getReplies(address){
   }
   return replies;
 }
-function getContent (address, divId) {
-  var ipfsContent = documentContract.at(address).getData();
-  ipfs.block.get(ipfsContent, function (err, res) {
-    if (err) {
-      htmlContent = markdown.toHTML(ipfsContent.slice(8, -2))
-      document.getElementById(divId).innerHTML = htmlContent;
-      return console.log(err);
-      }
-    else {
-      var result = ''
-      res.on('data', function(chunk) {
-        result += chunk
-      });
-      res.on('end', function() {
-        htmlContent = markdown.toHTML(result.slice(8, -2));
-        document.getElementById(divId).innerHTML = htmlContent;
-      })
-    }
 
+function getContent (address, divId) {
+  documentContract.at(address).getData(function(error, result) {
+    ipfs.block.get(result, function (err, res) {
+      if (err) {
+        htmlContent = markdown.toHTML(ipfsContent.slice(8, -2))
+        document.getElementById(divId).innerHTML = htmlContent;
+        return console.log(err);
+        }
+      else {
+        var result = ''
+        res.on('data', function(chunk) {
+          result += chunk
+        });
+        res.on('end', function() {
+          htmlContent = markdown.toHTML(result.slice(8, -2));
+          document.getElementById(divId).innerHTML = htmlContent;
+        })
+      }
+
+    });
   });
+
 }
 
 function getReplies(address) {
@@ -74,7 +80,7 @@ function publish(title, data) {
           console.log('return account', e, account);
           if(!e) {
               // Create a dialog requesting the transaction
-              postAddress = forum.makePost(data, {from: account.toLowerCase()})
+              forum.makePost(data, {from: account.toLowerCase()})
               document.getElementById('status').textContent = 'Waiting for new block...';
           }
       });
@@ -88,7 +94,7 @@ function reply(title, data, replyTo) {
   if (web3.eth.accounts && web3.eth.accounts.length > 0) {
 
       // Create a dialog requesting the transaction
-      replyAddress = forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: replyCost});
+      forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: replyCost});
 
     } else {
       console.log('callbacks', mist.callbacks);
@@ -96,7 +102,7 @@ function reply(title, data, replyTo) {
           console.log('return account', e, account);
           if(!e) {
               // Create a dialog requesting the transaction
-              replyAddress = forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: replyCost});
+              forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: replyCost});
           }
       });
       console.log('callbacks', mist.callbacks);

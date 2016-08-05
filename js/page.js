@@ -31,56 +31,62 @@ function init() {
   }
   else {
     getContent(postAddress, "bodyContent");
-    document.getElementById("title").textContent = getTitle(postAddress);
-    author = documentContract.at(postAddress).getAuthors()[0]
-    document.getElementById('author').innerHTML = "by <a href='user.html?query=" + author + "'>"+author+"</a>";
-    document.getElementById('tags').innerHTML = "Tagged with: " + getTags(postAddress);
+
+    forum.getTitle(postAddress, function (error, result) {
+      document.getElementById("title").textContent = result;
+    });
+
+    documentContract.at(postAddress).getAuthors( function (error, result) {
+      document.getElementById('author').innerHTML = "by <a href='user.html?query=" + result[0] + "'>"+result[0]+"</a>";
+    });
+    getTags(postAddress, 'tags');
 
     //Get replies
-    var replies = getReplies(postAddress);
-    if (replies.length === 0) {
-      console.log("no replies")
-    }
-    else {
-      for (i = 0; i < replies.length; i++) {
-        console.log(replies);
-
-
-        reply = document.createElement("div");
-        reply.className = "comments";
-        reply.id = "reply" + i.toString();
-
-        replyTitle = document.createElement('h1');
-        replyTitle.className = "header"
-        replyTitle.id = reply.id + "Title";
-        replyTitle.textContent = getTitle(replies[1]);
-
-        replyAuthor = document.createElement('div');
-
-        replyAuthor.className = "subtitle";
-        author = documentContract.at(replies[i]).getAuthors()[0];
-        replyAuthor.innerHTML = "by <a href='user.html?query=" + author + "'>"+ author+"</a>";
-
-        content = document.createElement("div");
-        content.id = reply.id + "Content";
-
-        numberOfReplies = document.createElement('a');
-        numberOfReplies.className = "subtitle";
-        numberOfReplies.href = "page.html?query="+replies[i];
-        numberOfReplies.style = "float: right;";
-        numberOfReplies.textContent = getReplies(replies[i]).length.toString() + " reply[s]";
-
-        document.getElementById('replies').appendChild(reply);
-
-        reply.appendChild(replyTitle);
-        reply.appendChild(replyAuthor);
-        reply.appendChild(content);
-        reply.appendChild(numberOfReplies);
-
-        getContent(replies[i], content.id);
-        }
+    forum.getReplies(postAddress, function(error, result) {
+      if (result.length === 0) {
+        console.log("no replies")
       }
-    }
+      else {
+        for (i = 0; i < result.length; i++) {
+          console.log(result);
+
+
+          reply = document.createElement("div");
+          reply.className = "comments";
+          reply.id = "reply" + i.toString();
+
+          replyTitle = document.createElement('h1');
+          replyTitle.className = "header"
+          replyTitle.id = reply.id + "Title";
+          replyTitle.textContent = getTitle(result[1]);
+
+          replyAuthor = document.createElement('div');
+
+          replyAuthor.className = "subtitle";
+          author = documentContract.at(result[i]).getAuthors()[0];
+          replyAuthor.innerHTML = "by <a href='user.html?query=" + author + "'>"+ author+"</a>";
+
+          content = document.createElement("div");
+          content.id = reply.id + "Content";
+
+          numberOfReplies = document.createElement('a');
+          numberOfReplies.className = "subtitle";
+          numberOfReplies.href = "page.html?query="+result[i];
+          numberOfReplies.style = "float: right;";
+          numberOfReplies.textContent = getReplies(result[i]).length.toString() + " reply[s]";
+
+          document.getElementById('replies').appendChild(reply);
+
+          reply.appendChild(replyTitle);
+          reply.appendChild(replyAuthor);
+          reply.appendChild(content);
+          reply.appendChild(numberOfReplies);
+
+          getContent(result[i], content.id);
+          }
+        }
+    });
+  }
 
     var replyButton = document.getElementById('new-reply');
     replyButton.onclick = function() {

@@ -42,22 +42,22 @@
 
     document.getElementById('home-user').href = "user.html?query=" + web3.eth.accounts[0];
 
-    posts = getPostsFromTag(query);
-    console.log(posts);
-    for(i = 0; i<posts.length; i++) {
-      var postLink = document.createElement('a');
-      postLink.href = "page.html?query="+posts[i];
-      postLink.id = "post" + i.toString();
-      postLink.style = "text-decoration: none;";
-      var post = document.createElement("div");
-      post.className= 'comments';
-      post.id = postLink.id + "content";
-      post.textContent = getTitle(posts[i]);
-      document.getElementById("posts").appendChild(postLink)
-      console.log("working?")
-      postLink.appendChild(post);
+    forum.getPostsFromTag(query, function(error, result) {
+      for(i = 0; i<result.length; i++) {
+        var postLink = document.createElement('a');
+        postLink.href = "page.html?query="+result[i];
+        postLink.id = "post" + i.toString();
+        postLink.style = "text-decoration: none;";
+        var post = document.createElement("div");
+        post.className= 'comments';
+        post.id = postLink.id + "content";
+        post.textContent = getTitle(result[i]);
+        document.getElementById("posts").appendChild(postLink)
+        postLink.appendChild(post);
 
-    }
+      }
+    });
+
   }
 
   if (document.addEventListener) document.addEventListener("DOMContentLoaded", init, false);
