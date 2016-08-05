@@ -17,7 +17,7 @@ function getTags(address, divID) {
 }
 
 function getContent (address, divId) {
-  document.getElementById(divID).innerHTML = "Loading IPFS Content";
+  document.getElementById(divId).innerHTML = "Loading IPFS Content";
   documentContract.at(address).getData(function(error, result) {
     ipfs.block.get(result, function (err, res) {
       if (err) {
