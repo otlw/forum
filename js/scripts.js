@@ -16,16 +16,8 @@ function getTags(address, divID) {
   })
 }
 
-function getReplies(address){
-
-  var replies = forum.getReplies(address);
-  if (replies.length === 0) {
-    document.getElementById('status').textContent = "No comments";
-  }
-  return replies;
-}
-
 function getContent (address, divId) {
+  document.getElementById(divID).innerHTML = "Loading IPFS Content";
   documentContract.at(address).getData(function(error, result) {
     ipfs.block.get(result, function (err, res) {
       if (err) {
@@ -49,26 +41,6 @@ function getContent (address, divId) {
 
 }
 
-function getReplies(address) {
-  var replies = forum.getReplies(address)
-  return replies;
-}
-
-function getTitle (address) {
-  var title = forum.getTitle(address);
-  return title;
-}
-
-function getPostsFromAuthor (address) {
-  var posts = forum.getPostsFromAuthor(address);
-  return posts;
-}
-
-function getPostsFromTag(name) {
-  var posts = forum.getPostsFromTag(name);
-  return posts;
-}
-
 function publish(title, data) {
   if (web3.eth.accounts && web3.eth.accounts.length > 0) {
 
@@ -90,24 +62,26 @@ function publish(title, data) {
 }
 
 function reply(title, data, replyTo) {
-  replyCost = forum.getReplyCost();
-  if (web3.eth.accounts && web3.eth.accounts.length > 0) {
+  forum.getReplyCost( function(error, result) {
+    if (web3.eth.accounts && web3.eth.accounts.length > 0) {
 
-      // Create a dialog requesting the transaction
-      forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: replyCost});
+        // Create a dialog requesting the transaction
+        forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: result});
 
-    } else {
-      console.log('callbacks', mist.callbacks);
-      mist.requestAccount(function(e, account) {
-          console.log('return account', e, account);
-          if(!e) {
-              // Create a dialog requesting the transaction
-              forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: replyCost});
-          }
-      });
-      console.log('callbacks', mist.callbacks);
+      } else {
+        console.log('callbacks', mist.callbacks);
+        mist.requestAccount(function(e, account) {
+            console.log('return account', e, account);
+            if(!e) {
+                // Create a dialog requesting the transaction
+                forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: result});
+            }
+        });
+        console.log('callbacks', mist.callbacks);
 
-    }
+      }
+
+  });
 }
 
 function tagPost(address, tag){
