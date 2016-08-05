@@ -96,7 +96,7 @@ function reply(title, data, replyTo) {
             console.log('return account', e, account);
             if(!e) {
                 // Create a dialog requesting the transaction
-                forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: result} function(error, result){
+                forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: result}, function(error, result){
                   if(error) {
                     console.log(error);
                     return;
