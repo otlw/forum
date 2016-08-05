@@ -49,7 +49,9 @@
         post.id = "post" + i.toString();
         postContent = document.createElement("a");
         postContent.href = "page.html?query="+result[i]
-        postContent.textContent = getTitle(result[i]);
+        forum.getTitle(result[i], function(error, result) {
+          postContent.textContent = result;
+        });
         document.getElementById("posts").appendChild(post)
         post.appendChild(postContent);
 

@@ -51,7 +51,9 @@
         var post = document.createElement("div");
         post.className= 'comments';
         post.id = postLink.id + "content";
-        post.textContent = getTitle(result[i]);
+        forum.getTitle(result[i], function(error, result) {
+          post.textContent = result;
+        });
         document.getElementById("posts").appendChild(postLink)
         postLink.appendChild(post);
 
