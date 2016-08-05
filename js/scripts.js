@@ -79,7 +79,6 @@ function publish(title, data) {
 function reply(title, data, replyTo) {
   forum.getReplyCost( function(error, result) {
     if (web3.eth.accounts && web3.eth.accounts.length > 0) {
-
         // Create a dialog requesting the transaction
         forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: result} function(error, result){
           if(error) {
