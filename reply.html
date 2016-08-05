@@ -28,10 +28,9 @@
   <script>
   function init() {
     query = decodeURI(getParameterByName('query'));
-    getTitle(query, function(error, result) {
+    forum.getTitle(query, function(error, result) {
       document.getElementById("replyto").innerHTML = "Reply to: " + result;
     })
-
     var noWeb3 = document.getElementById('noWeb3')
     // IPFS Initialization
     ipfs = window.IpfsApi('localhost', '5001');
