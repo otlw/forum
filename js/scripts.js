@@ -45,15 +45,30 @@ function publish(title, data) {
   if (web3.eth.accounts && web3.eth.accounts.length > 0) {
 
       // Create a dialog requesting the transaction
-      newDocument = forum.makePost(title, data, [web3.eth.accounts[0]], {from: web3.eth.accounts[0]})
+      forum.makePost(title, data, [web3.eth.accounts[0]], {from: web3.eth.accounts[0]}, function(error, result){
+        if(error) {
+          console.log(error);
+          return;
+          }
+        else {
+          return;
+          }
+        })
     } else {
       console.log('callbacks', mist.callbacks);
       mist.requestAccount(function(e, account) {
           console.log('return account', e, account);
           if(!e) {
               // Create a dialog requesting the transaction
-              forum.makePost(data, {from: account.toLowerCase()})
-              document.getElementById('status').textContent = 'Waiting for new block...';
+              forum.makePost(title, data, [web3.eth.accounts[0]], {from: web3.eth.accounts[0]}, function(error, result){
+                if(error) {
+                  console.log(error);
+                  return;
+                  }
+                else {
+                  return;
+                  }
+                })
           }
       });
       console.log('callbacks', mist.callbacks);
@@ -66,7 +81,15 @@ function reply(title, data, replyTo) {
     if (web3.eth.accounts && web3.eth.accounts.length > 0) {
 
         // Create a dialog requesting the transaction
-        forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: result});
+        forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: result} function(error, result){
+          if(error) {
+            console.log(error);
+            return;
+            }
+          else {
+            return;
+            }
+        });
 
       } else {
         console.log('callbacks', mist.callbacks);
@@ -74,7 +97,15 @@ function reply(title, data, replyTo) {
             console.log('return account', e, account);
             if(!e) {
                 // Create a dialog requesting the transaction
-                forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: result});
+                forum.makeReply(title, data, replyTo, {from: web3.eth.accounts[0], value: result} function(error, result){
+                  if(error) {
+                    console.log(error);
+                    return;
+                    }
+                  else {
+                    return;
+                    }
+                });
             }
         });
         console.log('callbacks', mist.callbacks);
