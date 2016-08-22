@@ -5,22 +5,20 @@
     <link rel='stylesheet' href='style.css' type='text/css'>
   </head>
 
-  <div class="navbar">
-    <a href= "index.html">Home</a> <a id="home-user">My Posts</a>
-  </div>
+  <fieldset style="border-style: none; border-top-style: solid; padding-bottom: 0px; background-color: inherit;">
+    <legend><a href= "index.html">Home</a> <a id="home-user" class = >My Posts</a></legend>
+  </fieldset>
   <br>
-  <div class='content'>
-    <h2 id = "user"></h2>
-  </div>
 
-  <div id="posts" class = 'replybox'>
-  </div>
+  <fieldset id="posts">
+    <legend><h2 id = "title"></h2></legend>
+  </fieldset>
 
 
 <script type="text/javascript">
   function init() {
     query = decodeURI(getParameterByName('query'));
-    document.getElementById("user").innerHTML = "Posts tagged: " + query;
+    document.getElementById("title").innerHTML = "Posts tagged: " + query;
     var noWeb3 = document.getElementById('noWeb3')
     // IPFS Initialization
     ipfs = window.IpfsApi('localhost', '5001');
@@ -48,14 +46,25 @@
         postLink.href = "page.html?query="+result[i];
         postLink.id = "post" + i.toString();
         postLink.style = "text-decoration: none;";
-        var post = document.createElement("div");
-        post.className= 'comments';
-        post.id = postLink.id + "content";
+        var post = document.createElement("fieldset");
+        post.id = postLink.id + i.toString();
+        postTitle = document.createElement('span')
+        postTitle.id = post.id + "title";
         forum.getTitle(result[i], function(error, result) {
-          post.textContent = result;
+          postTitle.textContent = result;
         });
+        var numberOfReplies = document.createElement('span');
+        numberOfReplies.className = "subtitle";
+        numberOfReplies.href = "page.html?query="+result[i];
+        numberOfReplies.style = "float: right;";
+        forum.getReplies(result[i], function(err, res){
+          numberOfReplies.innerHTML = res.length.toString() + " reply[s]";
+        });
+
         document.getElementById("posts").appendChild(postLink)
         postLink.appendChild(post);
+        post.appendChild(postTitle);
+        post.appendChild(numberOfReplies);
 
       }
     });

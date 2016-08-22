@@ -45,17 +45,20 @@ function init() {
     forum.getReplies(postAddress, function(error, result) {
       if (result.length === 0) {
         console.log("no replies")
+        noreplies = document.createElement('div');
+        noreplies.textContent = "No Replies";
+        document.getElementById('replies').appendChild(noreplies);
       }
       else {
         for (i = 0; i < result.length; i++) {
           console.log(result);
 
 
-          reply = document.createElement("div");
+          reply = document.createElement("fieldset");
           reply.className = "comments";
           reply.id = "reply" + i.toString();
 
-          replyTitle = document.createElement('h1');
+          replyTitle = document.createElement('legend');
           replyTitle.className = "header"
           replyTitle.id = reply.id + "Title";
           replyTitle.textContent = getTitle(result[1]);
@@ -73,7 +76,10 @@ function init() {
           numberOfReplies.className = "subtitle";
           numberOfReplies.href = "page.html?query="+result[i];
           numberOfReplies.style = "float: right;";
-          numberOfReplies.textContent = getReplies(result[i]).length.toString() + " reply[s]";
+
+          forum.getReplies(result[i], function(error, result){
+            numberOfReplies.textContent = result.length.toString() + " reply[s]";
+          });
 
           document.getElementById('replies').appendChild(reply);
 

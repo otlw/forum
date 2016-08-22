@@ -5,22 +5,21 @@
     <link rel='stylesheet' href='style.css' type='text/css'>
   </head>
 
-  <div class="navbar">
-    <a href= "index.html">Home</a> <a id="home-user">My Posts</a>
-  </div>
+  <fieldset style="border-style: none; border-top-style: solid; padding-bottom: 0px; background-color: inherit;">
+    <legend><a href= "index.html">Home</a> <a id="home-user" class = >My Posts</a></legend>
+  </fieldset>
   <br>
-  <div class='content'>
-    <h2 id = "user"></h2>
-  </div>
 
-  <div id="posts" class = 'replybox'>
-  </div>
+
+  <fieldset id="posts">
+    <legend><h2 id = "user"></h2></legend>
+  </fieldset>
 
 
 <script type="text/javascript">
   function init() {
     query = decodeURI(getParameterByName('query'));
-    document.getElementById("user").innerHTML = "Posts by: <br>" + query;
+    document.getElementById("user").innerHTML = "Posts by: " + query;
     var noWeb3 = document.getElementById('noWeb3')
     // IPFS Initialization
     ipfs = window.IpfsApi('localhost', '5001');
@@ -44,8 +43,7 @@
 
     forum.getPostsFromAuthor(query, function(error, result) {
       for(i = 0; i < result.length; i++) {
-        var post = document.createElement("div");
-        post.className= 'comments';
+        var post = document.createElement("fieldset");
         post.id = "post" + i.toString();
         postContent = document.createElement("a");
         postContent.href = "page.html?query="+result[i]

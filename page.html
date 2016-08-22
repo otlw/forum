@@ -7,25 +7,26 @@
     <link rel='stylesheet' href='style.css' type='text/css'>
   </head>
 
-  <div class="navbar">
-    <a href= "index.html">Home</a> <a id="home-user" class = >My Posts</a>
-  </div>
+  <fieldset style="border-style: none; border-top-style: solid; padding-bottom: 0px; background-color: inherit;">
+    <legend><a href= "index.html">Home</a> <a id="home-user" class = >My Posts</a></legend>
+  </fieldset>
   <body>
-    <div class="content">
+    <fieldset>
       <div id="noWeb3" class="warning" style = "display: none;">
         This Browser does not support Ethereum apps. <br> <a href="http://ethereum.org">Download Mist</a>
       </div>
 
-      <h1 id="title" class="header"></h1>
+      <legend style="padding-top: 1em;"><h1 id="title" class="header"></h1></legend>
       <div id = "author" class = "subtitle"></div>
       <div id="bodyContent"> </div>
       <div id ='tags' class="tags"> </div>
 
       <button id="new-reply">Reply</button>
-    </div>
-
-    <div id="replies" class="content">
-    </div>
+    </fieldset>
+    <br>
+    <fieldset id="replies">
+      <legend>Replies</legend>
+    </fieldset>
 
     <script type="text/javascript">
       function autorun(){
