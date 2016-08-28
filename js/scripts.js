@@ -31,16 +31,8 @@ function getContent (address, divId) {
         console.log(res)
         console.log("test")
         var string = new TextDecoder('utf-8').decode(res.data);
-        htmlContent = markdown.toHTML(string);
+        htmlContent = markdown.toHTML(string.slice(8, -2));
         document.getElementById(divId).innerHTML = htmlContent;
-        var result = ''
-        res.on('data', function(chunk) {
-          result += chunk
-        });
-        res.on('end', function() {
-          htmlContent = markdown.toHTML(result.slice(8, -2));
-          document.getElementById(divId).innerHTML = htmlContent;
-        })
       }
 
     });
