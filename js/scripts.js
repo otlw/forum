@@ -18,10 +18,12 @@ function getTags(address, divID) {
 
 function getContent (address, divId) {
   document.getElementById(divId).innerHTML = "Loading IPFS Content";
-  documentContract.at(address).getData(function(error, result) {
-    ipfs.block.get(result, function (err, res) {
+  documentContract.at(address).getData(function(error, hash) {
+    console.log(hash)
+    ipfs.block.get(hash, function (err, res) {
       if (err) {
-        htmlContent = markdown.toHTML(ipfsContent.slice(8, -2))
+        console.log(hash);
+        htmlContent = markdown.toHTML(hash)
         document.getElementById(divId).innerHTML = htmlContent;
         return console.log(err);
         }
