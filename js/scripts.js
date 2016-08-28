@@ -28,6 +28,11 @@ function getContent (address, divId) {
         return console.log(err);
         }
       else {
+        console.log(res)
+        console.log("test")
+        var string = TextDecoder(encoding).decode(res.data);
+        htmlContent = markdown.toHTML(string);
+        document.getElementById(divId).innerHTML = htmlContent;
         var result = ''
         res.on('data', function(chunk) {
           result += chunk
