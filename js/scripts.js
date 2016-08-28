@@ -30,7 +30,7 @@ function getContent (address, divId) {
       else {
         console.log(res)
         console.log("test")
-        var string = TextDecoder(encoding).decode(res.data);
+        var string = new TextDecoder('utf-8').decode(res.data);
         htmlContent = markdown.toHTML(string);
         document.getElementById(divId).innerHTML = htmlContent;
         var result = ''
