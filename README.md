@@ -3,20 +3,10 @@
 A simple forum system DApp, based on [these contracts](https://github.com/otlw/otlw-publish), and add the relevant ones to your Ethereum Wallet to use them. .
 
 ## Set Up
-To use this application you will need [Mist](https://github.com/ethereum/mist/) and [IPFS](https://ipfs.io) installed locally.
-
-### IPFS
-Once you have downloaded IPFS you need to run `ipfs init` followed by `ipfs daemon` to run the local IPFS server.
-
-If you wish to use the app hosted at otlw.co, you will need to first whitelist the domain in IPFS through.
-```bash
-$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin "[\"http://otlw.co\"]"
-```
-
-If you don't want to trust our hosting you can host the application yourself locally, by cloning this repo. Hopefully future intergration between Mist and IPFS will negate the need for to whitelist.
+To use this application you will need either to be running [Mist](https://github.com/ethereum/mist/) or have the [MetaMask](https://metamask.io/) extension installed in Chrome. If you want to post large content of your own we also recommend you get [ipfs](https://ipfs.io/) installed as well.
 
 ###Mist
-Once you have IPFS set up you can navigate to either `otlw.co/forum`, or you locally hosted `index.html` to begin using the application.
+You can navigate to either `otlw.co/forum`, or you locally hosted `index.html` to begin using the application.
 
 Remember to set an account in Mist!
 
@@ -33,7 +23,7 @@ We use IPFS for content distribution so if you want to post or reply with any co
 ```
 QmbRk7CRhF9Ag2PBrZmTvaP99XsPbE3kkSVTxL4oDgkosu
 ```
-Then submit this hash as the content of your post of reply. You need to also be running `ipfs daemon` so that others can access this file.
+Then submit this hash as the content of your post of reply. You need to also be running `ipfs daemon` so that others can initially access this file.
 
 ##Support
 We're a small development team, and we're entirely self-funded. Which means we literally used our only ether to deploy this contract. So any help, whether in the form of donations or pull requests, is much appreciated.
