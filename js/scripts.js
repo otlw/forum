@@ -17,6 +17,8 @@ var HttpClient = function() {
 }
 
 function getTags(address, divID) {
+  forum = web3.eth.contract(forumABI).at(forumAddress);
+
   var tags = []
   forum.getNumberOfTags(address, function(error, result) {
     for( k = 0; k < result; k++) {
@@ -43,6 +45,7 @@ function getContent (address, divId) {
 }
 
 function publish(title, data) {
+  forum = web3.eth.contract(forumABI).at(forumAddress);
   if (web3.eth.accounts && web3.eth.accounts.length > 0) {
 
       // Create a dialog requesting the transaction
@@ -78,6 +81,8 @@ function publish(title, data) {
 }
 
 function reply(title, data, replyTo) {
+  forum = web3.eth.contract(forumABI).at(forumAddress);
+
   forum.getReplyCost( function(error, result) {
     if (web3.eth.accounts && web3.eth.accounts.length > 0) {
         // Create a dialog requesting the transaction
@@ -116,6 +121,8 @@ function reply(title, data, replyTo) {
 }
 
 function tagPost(address, tag){
+  forum = web3.eth.contract(forumABI).at(forumAddress);
+
   if (web3.eth.accounts && web3.eth.accounts.length > 0) {
       // Create a dialog requesting the transaction
       forum.addTag(address, tag, {from: web3.eth.accounts[0]});
