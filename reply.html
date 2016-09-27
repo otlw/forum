@@ -1,6 +1,5 @@
 <html>
   <head>
-    <script src="https://npmcdn.com/ipfs-api/dist/index.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/index.js"></script>
     <script src="js/markdown.js"></script>
@@ -32,8 +31,6 @@
       document.getElementById("replyto").innerHTML = "Reply to: " + result;
     })
     var noWeb3 = document.getElementById('noWeb3')
-    // IPFS Initialization
-    ipfs = window.IpfsApi('localhost', '5001');
 
     // Web3 Initialization
     if(typeof web3 !== 'undefined' && typeof Web3 !== 'undefined') {

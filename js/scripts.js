@@ -4,6 +4,19 @@ var documentABI =  [{"constant":false,"inputs":[],"name":"getTotalWeight","outpu
 var textContent;
 var forum = web3.eth.contract(forumABI).at(forumAddress);
 
+var HttpClient = function() {
+    this.get = function(aUrl, aCallback) {
+        var anHttpRequest = new XMLHttpRequest();
+        anHttpRequest.onreadystatechange = function() {
+            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                aCallback(anHttpRequest.responseText);
+        }
+
+        anHttpRequest.open( "GET", aUrl, true );
+        anHttpRequest.send( null );
+    }
+}
+
 function getTags(address, divID) {
   var tags = []
   forum.getNumberOfTags(address, function(error, result) {
@@ -20,22 +33,12 @@ function getContent (address, divId) {
   document.getElementById(divId).innerHTML = "Loading IPFS Content";
   documentContract.at(address).getData(function(error, hash) {
     console.log(hash)
-    ipfs.block.get(hash, function (err, res) {
-      if (err) {
-        console.log(hash);
-        htmlContent = markdown.toHTML(hash)
-        document.getElementById(divId).innerHTML = htmlContent;
-        return console.log(err);
-        }
-      else {
-        console.log(res)
-        console.log("test")
-        var string = new TextDecoder('utf-8').decode(res.data);
-        htmlContent = markdown.toHTML(string.slice(8, -2));
-        document.getElementById(divId).innerHTML = htmlContent;
-      }
-
-    });
+    url = "https://gateway.ipfs.io/ipfs/" + hash
+    var gateway = new HttpClient();
+    gateway.get(url, function(data) {
+      htmlContent = markdown.toHTML(data)
+      document.getElementById(divId).innerHTML = htmlContent;
+    })
   });
 
 }

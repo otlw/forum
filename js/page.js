@@ -3,7 +3,6 @@ function init() {
 
   var noWeb3 = document.getElementById('noWeb3')
   // IPFS Initialization
-  ipfs = window.IpfsApi('localhost', '5001');
 
   // Web3 Initialization
   if(typeof web3 !== 'undefined' && typeof Web3 !== 'undefined') {

@@ -1,7 +1,5 @@
 function init() {
   var noWeb3 = document.getElementById('noWeb3')
-  // IPFS Initialization
-  ipfs = window.IpfsApi('localhost', '5001');
   replyTo = decodeURI(getParameterByName('query'));
 
   // Web3 Initialization
