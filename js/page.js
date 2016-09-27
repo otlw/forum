@@ -2,7 +2,6 @@ function init() {
   postAddress = decodeURI(getParameterByName('query'));
 
   var noWeb3 = document.getElementById('noWeb3')
-  // IPFS Initialization
 
   // Web3 Initialization
   if(typeof web3 !== 'undefined' && typeof Web3 !== 'undefined') {
