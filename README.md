@@ -1,6 +1,6 @@
 # otlw-forum
 
-A simple forum system DApp, based on [these contracts](https://github.com/otlw/otlw-publish). It allows creating posts, tagging, and replying. 
+A simple forum system DApp, based on [these contracts](https://github.com/otlw/otlw-publish). It allows creating posts, tagging, and replying.
 
 ## Set Up
 To use this application you will need either to be running [Mist](https://github.com/ethereum/mist/) or have the [MetaMask](https://metamask.io/) extension installed in Chrome. If you want to post large content of your own we also recommend you get [ipfs](https://ipfs.io/) installed as well.
@@ -24,8 +24,3 @@ We use IPFS for content distribution so if you want to post or reply with any co
 QmbRk7CRhF9Ag2PBrZmTvaP99XsPbE3kkSVTxL4oDgkosu
 ```
 Then submit this hash as the content of your post of reply. You need to also be running `ipfs daemon` so that others can initially access this file.
-
-##Support
-We're a small development team, and we're entirely self-funded. Which means we literally used our only ether to deploy this contract. So any help, whether in the form of donations or pull requests, is much appreciated.
-
-For the former, our eth address is: `0x60c4dC9a557f7FF2E89ad791bAc53D42b51EeE03` and our btc address is `1CV8AKrgNgMZXw26saLtdj7r6p51XeCrfj`
