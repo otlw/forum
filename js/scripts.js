@@ -36,10 +36,16 @@ function getContent (address, divId) {
     console.log(hash)
     url = "https://gateway.ipfs.io/ipfs/" + hash
     var gateway = new HttpClient();
-    gateway.get(url, function(data) {
-      htmlContent = markdown.toHTML(data)
+    if (hash.substring(0,2)=='Qm') {
+      gateway.get(url, function(data, err) {
+        htmlContent = markdown.toHTML(data)
+        document.getElementById(divId).innerHTML = htmlContent;
+      })
+    }
+    else{
+      htmlContent = markdown.toHTML(hash)
       document.getElementById(divId).innerHTML = htmlContent;
-    })
+    }
   });
 
 }
