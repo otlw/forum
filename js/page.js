@@ -34,7 +34,6 @@ function init() {
         for (i = 0; i < result.length; i++) {
           console.log(result);
 
-
           reply = document.createElement("fieldset");
           reply.className = "comments";
           reply.id = "reply" + i.toString();
@@ -79,5 +78,10 @@ function init() {
     replyButton.onclick = function() {
       window.location.href = 'reply.html?query='+ postAddress;
     }
-
+    var tipButton = document.getElementById('tip');
+    tipButton.onclick = function(){
+      documentContract.at(postAddress).getAuthors( function (error, result) {
+        sendTransaction(result[0], web3.toWei(0.01, "ether"))
+      })
+    }
   }

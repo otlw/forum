@@ -68,9 +68,9 @@ button {
     background-color: #36454F;
     color: #FFF;
     padding: 2px 20px;
-    border-radius: 2px;
-    width: 100%;
+    border-radius: 3px;
     margin-top: 5px;
+    margin-right: 10px;
     margin-bottom: 0px;
     outline: none;
 }

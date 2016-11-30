@@ -59,7 +59,10 @@ function getContent (address, divId) {
       document.getElementById(divId).innerHTML = htmlContent;
     }
   });
+}
 
+function sendTransaction(_to, amount) {
+  web3.eth.sendTransaction({from: web3.eth.accounts[0], to:_to, value: amount}, function(err, result){})
 }
 
 function publish(title, data) {
