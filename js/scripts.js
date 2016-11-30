@@ -30,6 +30,17 @@ function getTags(address, divID) {
   })
 }
 
+function getTitle(address, divID) {
+  forum.getTitle(address, function(err, res){
+    if(err){
+      document.getElementById(divID).content = "Can't retrieve title"
+    }
+    console.log(divID)
+    document.getElementById(divID).innerHTML = res;
+  })
+}
+
+
 function getContent (address, divId) {
   document.getElementById(divId).innerHTML = "Loading IPFS Content";
   documentContract.at(address).getData(function(error, hash) {

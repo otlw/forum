@@ -23,15 +23,14 @@ function init() {
   var postMade = forum.PostMade({}, {fromBlock: 0, toBlock: 'latest'});
   postMade.watch(function(error, result){
     var postLink = document.createElement('a');
+    var br = document.createElement("br")
     postLink.href = "page.html?query="+result.args._postAddress;
-    postLink.id = "post" + result.args._postAddress;
+    postLink.id = result.args._postAddress;
     postLink.style = "text-decoration: none;";
     var post = document.createElement("fieldset");
     postTitle = document.createElement('span')
-    postTitle.id = post.id + "title";
-    forum.getTitle(result.args._postAddress, function(error, result) {
-      postTitle.textContent = result;
-    });
+    postTitle.id = postLink.id + "title";
+    getTitle(result.args._postAddress, postTitle.id);
     var numberOfReplies = document.createElement('span');
     numberOfReplies.className = "subtitle";
     numberOfReplies.href = "page.html?query="+result.args._postAddress;
@@ -44,5 +43,6 @@ function init() {
     postLink.appendChild(post);
     post.appendChild(postTitle);
     post.appendChild(numberOfReplies);
+    document.getElementById("latest").appendChild(br)
   })
 }
