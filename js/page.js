@@ -15,9 +15,7 @@ function init() {
   else {
     getContent(postAddress, "bodyContent");
 
-    forum.getTitle(postAddress, function (error, result) {
-      document.getElementById("title").textContent = result;
-    });
+    getTitle(postAddress, "title")
 
     documentContract.at(postAddress).getAuthors( function (error, result) {
       document.getElementById('author').innerHTML = "by <a href='user.html?query=" + result[0] + "'>"+result[0]+"</a>";

@@ -23,7 +23,6 @@ function init() {
   var postMade = forum.PostMade({}, {fromBlock: 0, toBlock: 'latest'});
   postMade.watch(function(error, result){
     var postLink = document.createElement('a');
-    var br = document.createElement("br")
     postLink.href = "page.html?query="+result.args._postAddress;
     postLink.id = result.args._postAddress;
     postLink.style = "text-decoration: none;";
@@ -43,6 +42,6 @@ function init() {
     postLink.appendChild(post);
     post.appendChild(postTitle);
     post.appendChild(numberOfReplies);
-    document.getElementById("latest").appendChild(br)
+    document.getElementById("latest").appendChild(document.createElement("br"))
   })
 }

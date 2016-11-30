@@ -31,12 +31,13 @@ function getTags(address, divID) {
 }
 
 function getTitle(address, divID) {
+  forum = web3.eth.contract(forumABI).at(forumAddress);
+
   forum.getTitle(address, function(err, res){
     if(err){
-      document.getElementById(divID).content = "Can't retrieve title"
+      document.getElementById(divID).textContent = "Can't retrieve title"
     }
-    console.log(divID)
-    document.getElementById(divID).innerHTML = res;
+    document.getElementById(divID).textContent = res;
   })
 }
 

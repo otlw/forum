@@ -25,14 +25,15 @@
     forum.getPostsFromAuthor(query, function(error, result) {
       for(i = 0; i < result.length; i++) {
         var post = document.createElement("fieldset");
-        post.id = "post" + i.toString();
-        postContent = document.createElement("a");
-        postContent.href = "page.html?query="+result[i]
-        forum.getTitle(result[i], function(error, result) {
-          postContent.textContent = result;
-        });
+        post.id = i.toString();
+        postTitle = document.createElement("a");
+        postTitle.id = post.id + "title";
+        postTitle.href = "page.html?query="+result[i];
+        getTitle(result[i], postTitle.id);
         document.getElementById("posts").appendChild(post)
-        post.appendChild(postContent);
+        document.getElementById("posts").appendChild(document.createElement("br"))
+
+        post.appendChild(postTitle);
 
         if (web3.eth.accounts[0] === query) {
           tagForm = document.createElement('input');
