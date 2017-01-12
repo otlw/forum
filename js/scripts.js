@@ -113,6 +113,7 @@ function reply(title, data, replyTo) {
             return;
             }
           else {
+            window.location.href = "/page.html?query="+replyTo;
             return;
             }
         });

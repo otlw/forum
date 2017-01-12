@@ -41,13 +41,15 @@ function init() {
           replyTitle = document.createElement('legend');
           replyTitle.className = "header"
           replyTitle.id = reply.id + "Title";
-          replyTitle.textContent = getTitle(result[1]);
+          getTitle(result[i], replyTitle.id);
 
           replyAuthor = document.createElement('div');
-
           replyAuthor.className = "subtitle";
-          author = documentContract.at(result[i]).getAuthors()[0];
-          replyAuthor.innerHTML = "by <a href='user.html?query=" + author + "'>"+ author+"</a>";
+          replyAuthor.id = reply.id + "Author";
+
+          documentContract.at(postAddress).getAuthors( function (error, result) {
+            document.getElementById(replyAuthor.id).innerHTML = "by <a href='user.html?query=" + result[0] + "'>"+result[0]+"</a>";
+          });
 
           content = document.createElement("div");
           content.id = reply.id + "Content";
