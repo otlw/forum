@@ -26,6 +26,7 @@
 
   <script>
   function load() {
+    var query = decodeURI(getParameterByName('query'));
     var forum = web3.eth.contract(forumABI).at(forumAddress);
     document.getElementById('home-user').href = "user.html?query=" + web3.eth.accounts[0];
 
