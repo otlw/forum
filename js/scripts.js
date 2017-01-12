@@ -25,6 +25,7 @@ function getTags(address, divID) {
     for( k = 0; k < result; k++) {
       forum.getTagFromPosts(address, k, function(error, result) {
         tags.push('<a href = tag.html?query='+result+">"+result+"</a>");
+        console.log(tags);
         document.getElementById(divID).innerHTML = "Tagged with: " + tags;
       })
     }
@@ -114,7 +115,7 @@ function reply(title, data, replyTo) {
             return;
             }
           else {
-            window.location.href = "/page.html?query="+replyTo;
+            window.location.href = "/forum/page.html?query="+replyTo;
             return;
             }
         });
@@ -131,6 +132,7 @@ function reply(title, data, replyTo) {
                     return;
                     }
                   else {
+                    window.location.href = "/forum/page.html?query="+replyTo;
                     return;
                     }
                 });
