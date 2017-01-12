@@ -16,6 +16,7 @@ var HttpClient = function() {
     }
 }
 
+
 function getTags(address, divID) {
   forum = web3.eth.contract(forumABI).at(forumAddress);
 
@@ -147,7 +148,16 @@ function tagPost(address, tag){
 
   if (web3.eth.accounts && web3.eth.accounts.length > 0) {
       // Create a dialog requesting the transaction
-      forum.addTag(address, tag, {from: web3.eth.accounts[0]});
+      forum.addTag(address, tag, {from: web3.eth.accounts[0]}, function(error, result){
+        if(error) {
+          console.log(error);
+          return;
+          }
+        else {
+          return;
+          }
+      }
+      );
 
     } else {
       console.log('callbacks', mist.callbacks);
@@ -155,7 +165,16 @@ function tagPost(address, tag){
           console.log('return account', e, account);
           if(!e) {
               // Create a dialog requesting the transaction
-              forum.addTag(address, tag, {from: web3.eth.accounts[0]});
+              forum.addTag(address, tag, {from: web3.eth.accounts[0]}, function(error, result){
+                if(error) {
+                  console.log(error);
+                  return;
+                  }
+                else {
+                  return;
+                  }
+              }
+              );
           }
       });
       console.log('callbacks', mist.callbacks);
